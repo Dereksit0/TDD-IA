@@ -45,7 +45,7 @@ def test_pista_menor(monkeypatch, capsys):
 
 
 def test_pierde_tras_siete_intentos(monkeypatch, capsys):
-    salida, it = ejecutar(monkeypatch, capsys, ["10"] * 7)
+    salida, it = ejecutar(monkeypatch, capsys, ["10"] * 7 + ["n"])
     assert "perdi" in salida
     assert "50" in salida
     assert next(it, _FIN) is _FIN
@@ -59,7 +59,7 @@ def test_gana_en_septimo_intento(monkeypatch, capsys):
 
 
 def test_entradas_invalidas_no_consumen_intentos(monkeypatch, capsys):
-    respuestas = ["abc", "0", "101"] + ["10"] * 7
+    respuestas = ["abc", "0", "101"] + ["10"] * 7 + ["n"]
     salida, it = ejecutar(monkeypatch, capsys, respuestas)
     assert "perdi" in salida
     assert "50" in salida
