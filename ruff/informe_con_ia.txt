@@ -1,0 +1,7 @@
+### ruff check (final)
+All checks passed!
+### ejecución
+Average: 8.166666666666666 / Max: 9
+Ana 20
+### codificación detectada por Python
+utf-8

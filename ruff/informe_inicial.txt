@@ -1,0 +1,189 @@
+UP009 [*] UTF-8 encoding declaration is unnecessary
+ --> original\failing_code.py:2:1
+  |
+1 | #!/usr/bin/env python3
+2 | # -*- coding: utf-8 -*-
+  | ^^^^^^^^^^^^^^^^^^^^^^^
+3 | """
+4 | Developer: Miguel Jara Maldonado.
+  |
+help: Remove unnecessary coding comment
+  |
+1 | #!/usr/bin/env python3
+  - # -*- coding: utf-8 -*-
+2 | """
+  |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> original\failing_code.py:9:1
+   |
+ 7 |   """
+ 8 |
+ 9 | / import sys
+10 | | import os
+11 | | from math import sqrt
+   | |_____________________^
+help: Organize imports
+   |
+8  |
+9  + import os
+10 | import sys
+   - import os
+11 | from math import sqrt
+   |
+
+F401 [*] `sys` imported but unused
+  --> original\failing_code.py:9:8
+   |
+ 7 | """
+ 8 |
+ 9 | import sys
+   |        ^^^
+10 | import os
+11 | from math import sqrt
+   |
+help: Remove unused import: `sys`
+  |
+8 |
+  - import sys
+9 | import os
+  |
+
+F401 [*] `os` imported but unused
+  --> original\failing_code.py:10:8
+   |
+ 9 | import sys
+10 | import os
+   |        ^^
+11 | from math import sqrt
+   |
+help: Remove unused import: `os`
+   |
+9  | import sys
+   - import os
+10 | from math import sqrt
+   |
+
+F401 [*] `math.sqrt` imported but unused
+  --> original\failing_code.py:11:18
+   |
+ 9 | import sys
+10 | import os
+11 | from math import sqrt
+   |                  ^^^^
+help: Remove unused import: `math.sqrt`
+   |
+10 | import os
+   - from math import sqrt
+11 |
+   |
+
+F841 Local variable `weights` is assigned to but never used
+  --> original\failing_code.py:15:5
+   |
+14 | def summarize_grades(grades: list):
+15 |     weights = {"exam": 0.6, "homework": 0.3, "exam": 0.1}
+   |     ^^^^^^^
+16 |     total = 0
+17 |     for grade in grades:
+   |
+help: Remove assignment to unused variable `weights`
+   |
+14 | def summarize_grades(grades: list):
+   -     weights = {"exam": 0.6, "homework": 0.3, "exam": 0.1}
+15 |     total = 0
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+F601 Dictionary key literal `"exam"` repeated
+  --> original\failing_code.py:15:46
+   |
+14 | def summarize_grades(grades: list):
+15 |     weights = {"exam": 0.6, "homework": 0.3, "exam": 0.1}
+   |                                              ^^^^^^
+16 |     total = 0
+17 |     for grade in grades:
+   |
+help: Remove repeated key literal `"exam"`
+
+F841 Local variable `average` is assigned to but never used
+  --> original\failing_code.py:21:5
+   |
+19 |             grade = float(grade)
+20 |         total += grade
+21 |     average = total / len(grades)
+   |     ^^^^^^^
+22 |     return "Average: {} / Max: {}".format(averge)
+   |
+help: Remove assignment to unused variable `average`
+   |
+20 |         total += grade
+   -     average = total / len(grades)
+21 +     total / len(grades)
+22 |     return "Average: {} / Max: {}".format(averge)
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+F524 `.format` call is missing argument(s) for placeholder(s): 1
+  --> original\failing_code.py:22:12
+   |
+20 |         total += grade
+21 |     average = total / len(grades)
+22 |     return "Average: {} / Max: {}".format(averge)
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+F821 Undefined name `averge`
+  --> original\failing_code.py:22:43
+   |
+20 |         total += grade
+21 |     average = total / len(grades)
+22 |     return "Average: {} / Max: {}".format(averge)
+   |                                           ^^^^^^
+
+F402 Import `sqrt` from line 11 shadowed by loop variable
+  --> original\failing_code.py:26:9
+   |
+25 | def print_approved(students: list):
+26 |     for sqrt in students:
+   |         ^^^^
+27 |         try:
+28 |             age = int(sqrt["age"])
+   |
+
+F841 [*] Local variable `error` is assigned to but never used
+  --> original\failing_code.py:29:30
+   |
+27 |         try:
+28 |             age = int(sqrt["age"])
+29 |         except ValueError as error:
+   |                              ^^^^^
+30 |             age = 0
+31 |         if sqrt["status"] is "approved":
+   |
+help: Remove assignment to unused variable `error`
+   |
+28 |             age = int(sqrt["age"])
+   -         except ValueError as error:
+29 +         except ValueError:
+30 |             age = 0
+   |
+
+F632 [*] Use `==` to compare constant literals
+  --> original\failing_code.py:31:12
+   |
+29 |         except ValueError as error:
+30 |             age = 0
+31 |         if sqrt["status"] is "approved":
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+32 |             print(sqrt["name"], age)
+   |
+help: Replace `is` with `==`
+   |
+30 |             age = 0
+   -         if sqrt["status"] is "approved":
+31 +         if sqrt["status"] == "approved":
+32 |             print(sqrt["name"], age)
+   |
+
+Found 13 errors.
+[*] 7 fixable with `--fix` (2 unsafe fixes available with `--fix --unsafe-fixes`).
